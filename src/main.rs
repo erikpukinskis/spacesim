@@ -23,7 +23,10 @@ fn setup(
         // Plane
         .spawn()
         .insert_bundle(PbrBundle {
-            mesh: meshes.add(Mesh::from(shape::Plane { size: 8.0 })),
+            mesh: meshes.add(Mesh::from(shape::Icosphere {
+                radius: 4.0,
+                subdivisions: 4,
+            })),
             material: materials.add(Color::rgb(1., 0.9, 0.9).into()),
             transform: Transform::from_translation(Vec3::new(4., 0., 4.)),
             ..Default::default()
