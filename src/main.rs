@@ -10,7 +10,9 @@ fn main() {
             ..Default::default()
         })
         .insert_resource(ClearColor(Color::rgb(0.0, 0.01, 0.02)))
+        .init_resource::<Ship>()
         .add_startup_system(setup.system())
+        .add_system(handle_key_press.system())
         .run();
 }
 
@@ -52,4 +54,43 @@ fn setup(
             transform: Transform::from_translation(Vec3::new(4.0, 8.0, 4.0)),
             ..Default::default()
         });
+}
+
+#[derive(Default)]
+struct Ship {
+    entity: Option<Entity>,
+    i: usize,
+    j: usize,
+}
+
+fn handle_key_press(
+    mut commands: Commands,
+    keyboard_input: Res<Input<KeyCode>>,
+    mut ship: ResMut<Ship>,
+    mut transforms: Query<&mut Transform>,
+) {
+    if keyboard_input.just_pressed(KeyCode::Up) {
+        info!("pitch down");
+    }
+    if keyboard_input.just_pressed(KeyCode::Down) {
+        info!("pitch up");
+    }
+    if keyboard_input.just_pressed(KeyCode::Right) {
+        info!("roll right");
+    }
+    if keyboard_input.just_pressed(KeyCode::Left) {
+        info!("roll left");
+    }
+
+    // let rotation = -std::f32::consts::FRAC_PI_2;
+
+    // *transforms.get_mut(game.player.entity.unwrap()).unwrap() = Transform {
+    //     translation: Vec3::new(
+    //         game.player.i as f32,
+    //         game.board[game.player.j][game.player.i].height,
+    //         game.player.j as f32,
+    //     ),
+    //     rotation: Quat::from_rotation_y(rotation),
+    //     ..Default::default()
+    // };
 }
