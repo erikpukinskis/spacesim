@@ -17,8 +17,10 @@
 
 ### Editing meshes
  - fill empty area between two edges: select them + f
+ - connect two points: select them + f
  - merge two points together: select them + m
  - split edges: select them, right click -> Subdivide
+ - dissolve edges by selecting, x -> Dissolve Edges
 
 ### Alignment
 
